@@ -47,7 +47,7 @@ export default function Signup() {
         {/* LEFT SIDE */}
         <section className="auth-panel auth-panel--accent">
           <div className="auth-panel__content auth-panel__content--center">
-            <span className="auth-badge">Join ShopEase</span>
+            <span className="auth-badge">Join Vogue</span>
             <h2 className="auth-welcome-title">Welcome Back!</h2>
             <p className="auth-welcome-copy">
               Already have an account? Login and continue shopping.

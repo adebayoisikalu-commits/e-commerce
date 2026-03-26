@@ -82,8 +82,7 @@ export default function Login() {
             <span className="auth-eyebrow">Sign in</span>
             <h1 className="auth-title">Welcome back</h1>
             <p className="auth-subtitle">
-              Login to continue shopping, manage your orders, and access your
-              saved products in one beautiful place.
+                Sign in to effortlessly continue your shopping journey, track your orders, and keep all your favorite products in one convenient, beautifully organized place.
             </p>
 
             {infoMessage && (
@@ -140,7 +139,7 @@ export default function Login() {
 
         <section className="auth-panel auth-panel--accent">
           <div className="auth-panel__content auth-panel__content--center">
-            <span className="auth-badge">ShopEase</span>
+            <span className="auth-badge">Vogue</span>
             <h2 className="auth-welcome-title">Hello, Friend!</h2>
             <p className="auth-welcome-copy">
               Enter your personal details and start your journey with a stylish,
