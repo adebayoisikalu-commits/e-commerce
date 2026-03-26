@@ -61,7 +61,7 @@ export default function Home() {
         <div className="hero-section__visual">
           <div className="hero-card hero-card--main">
             <img
-              src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80"
+              src="https://www.instyle.com/thmb/nswLuCLoYaOgGKS1mf3SxULvl7E=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-2214264711-8c1da132de854bea92ad54a52935689d.jpg"
               alt="Fashion collection"
             />
           </div>
