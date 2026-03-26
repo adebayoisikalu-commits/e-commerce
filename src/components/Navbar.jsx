@@ -22,6 +22,13 @@ const Navbar = () => {
           ShopEase
         </Link>
 <Link to="/cart">Cart ({cart.length})</Link>
+
+    {/* Admin link only visible to admin */}
+    {user && user.role === "admin" && (
+      <Link to="/admin" className="navbar__admin">
+        Admin
+      </Link>
+    )}
         <div className="navbar__actions">
           {user && (
             <div className="navbar__user">
