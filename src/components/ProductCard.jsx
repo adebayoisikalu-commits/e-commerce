@@ -18,7 +18,7 @@ export default function ProductCard({ product, addToCart }) {
       </div>
 
       <div className="product-card__content">
-        <p className="product-card__eyebrow">Signature Edit</p>
+        <p className="product-card__eyebrow">Luxury Picks</p>
         <h3 className="product-card__title">{product.name}</h3>
         <p className="product-card__description">
           {product.description ||

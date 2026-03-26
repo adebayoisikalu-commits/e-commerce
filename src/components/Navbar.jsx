@@ -19,7 +19,7 @@ const Navbar = () => {
     <header className="navbar">
       <div className="navbar__inner">
         <Link to="/" className="navbar__brand">
-          ShopEase
+        Moda de verano
         </Link>
 
         <Link to="/cart">Cart ({cart.length})</Link>

@@ -34,25 +34,19 @@ export default function Home() {
             <a href="#featured-products" className="hero-section__button">
               Shop Collection
             </a>
-            <button
-              type="button"
-              className="hero-section__button hero-section__button--secondary"
-            >
-              Explore Trends
-            </button>
           </div>
 
           <div className="hero-section__stats">
             <div className="hero-stat">
-              <strong>12k+</strong>
-              <span>Happy shoppers</span>
+              <strong>5k+</strong>
+              <span>Satisfied Customers</span>
             </div>
             <div className="hero-stat">
-              <strong>250+</strong>
-              <span>Curated styles</span>
+              <strong>50+</strong>
+              <span>Hot Picks</span>
             </div>
             <div className="hero-stat">
-              <strong>4.9/5</strong>
+              <strong>4.5/5</strong>
               <span>Top rated store</span>
             </div>
           </div>
@@ -68,8 +62,8 @@ export default function Home() {
 
           <div className="hero-card hero-card--floating">
             <p>Trending Now</p>
-            <strong>Summer Luxe Edit</strong>
-            <span>Fresh arrivals for a bold new season.</span>
+            <strong>Summer Luxe collection</strong>
+            <span>Elevate your style with our newest premium arrivals.</span>
           </div>
         </div>
       </section>
@@ -77,9 +71,9 @@ export default function Home() {
       <section className="promo-grid">
         <article className="promo-card promo-card--soft">
           <span>Summer 2026</span>
-          <h2>Breathable essentials for effortless everyday outfits.</h2>
+          <h2>Effortless Essentials for Every Day</h2>
           <p>
-            Lightweight fits, clean silhouettes, and premium finishing details.
+             Lightweight fabrics, clean lines, and premium details for your signature look.
           </p>
         </article>
 
@@ -107,9 +101,9 @@ export default function Home() {
             </h2>
           </div>
           <p className="section-heading__text">
-            Curated fashion picks from our newest arrivals, crafted to blend
-            comfort, luxury, and trend-forward design.
-          </p>
+           Discover our newest fashion picks—where comfort meets luxury and modern style.
+      </p>
+          
         </div>
 
         <div className="products-grid">
