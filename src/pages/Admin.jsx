@@ -1,3 +1,4 @@
+ // Admin.jsx
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -12,11 +13,19 @@ export default function Admin() {
   const [editingId, setEditingId] = useState(null);
 
   const API = `${import.meta.env.VITE_API_URL}/api/products`;
+  const token = localStorage.getItem("authToken");
 
   // GET PRODUCTS
   const fetchProducts = async () => {
-    const res = await axios.get(API);
-    setProducts(res.data);
+    try {
+      const res = await axios.get(API, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setProducts(res.data);
+    } catch (err) {
+      console.error("Failed to fetch products", err);
+      alert("Failed to load products");
+    }
   };
 
   useEffect(() => {
@@ -31,27 +40,48 @@ export default function Admin() {
   // ADD OR UPDATE
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (editingId) {
-      await axios.put(`${API}/${editingId}`, form);
-      setEditingId(null);
-    } else {
-      await axios.post(API, form);
+    try {
+      if (editingId) {
+        await axios.put(`${API}/${editingId}`, form, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setEditingId(null);
+      } else {
+        await axios.post(API, form, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+      }
+      setForm({ name: "", price: "", description: "", image: "" });
+      fetchProducts();
+    } catch (err) {
+      console.error("Failed to save product", err);
+      alert("Failed to save product");
     }
-
-    setForm({ name: "", price: "", description: "", image: "" });
-    fetchProducts();
   };
 
   // DELETE
   const handleDelete = async (id) => {
-    await axios.delete(`${API}/${id}`);
-    fetchProducts();
+    if (!window.confirm("Are you sure you want to delete this product?")) return;
+
+    try {
+      await axios.delete(`${API}/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      fetchProducts();
+    } catch (err) {
+      console.error("Failed to delete product", err);
+      alert("Failed to delete product");
+    }
   };
 
   // EDIT
   const handleEdit = (product) => {
-    setForm(product);
+    setForm({
+      name: product.name,
+      price: product.price,
+      description: product.description,
+      image: product.image,
+    });
     setEditingId(product._id);
   };
 
@@ -61,12 +91,36 @@ export default function Admin() {
 
       {/* FORM */}
       <form onSubmit={handleSubmit} className="admin-form">
-        <input name="name" placeholder="Name" value={form.name} onChange={handleChange} />
-        <input name="price" placeholder="Price" value={form.price} onChange={handleChange} />
-        <input name="image" placeholder="Image URL" value={form.image} onChange={handleChange} />
-        <textarea name="description" placeholder="Description" value={form.description} onChange={handleChange} />
+        <input
+          name="name"
+          placeholder="Name"
+          value={form.name}
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="price"
+          placeholder="Price"
+          value={form.price}
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="image"
+          placeholder="Image URL"
+          value={form.image}
+          onChange={handleChange}
+          required
+        />
+        <textarea
+          name="description"
+          placeholder="Description"
+          value={form.description}
+          onChange={handleChange}
+          required
+        />
 
-        <button>
+        <button type="submit">
           {editingId ? "Update Product" : "Add Product"}
         </button>
       </form>
@@ -75,7 +129,7 @@ export default function Admin() {
       <div className="admin-grid">
         {products.map((p) => (
           <div key={p._id} className="admin-card">
-            <img src={p.image} alt="" />
+            <img src={p.image} alt={p.name} />
             <h3>{p.name}</h3>
             <p>${p.price}</p>
 
