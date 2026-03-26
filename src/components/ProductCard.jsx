@@ -14,7 +14,7 @@ export default function ProductCard({ product, addToCart }) {
           alt={product.name}
           className="product-card__image"
         />
-        <span className="product-card__tag">New Arrival</span>
+         
       </div>
 
       <div className="product-card__content">
