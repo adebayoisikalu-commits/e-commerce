@@ -1,4 +1,4 @@
- // App.jsx
+// App.jsx
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -31,11 +31,15 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
-// Admin-only route
+// Admin-only route by email
 const AdminRoute = ({ children }) => {
   const user = getStoredUser();
-  // Replace "admin" with your actual admin role or check user email
-  if (!user || user.role !== "admin") return <Navigate to="/" replace />;
+  const adminEmail = "adebayoisikalu@gmail.com"; // <-- Replace with your email
+
+  if (!user || user.email !== adminEmail) {
+    return <Navigate to="/" replace />;
+  }
+
   return children;
 };
 
