@@ -763,6 +763,80 @@ input {
   background: linear-gradient(135deg, var(--auth-accent-start) 0%, var(--auth-accent-end) 100%);
 }
 
+.admin {
+  padding: 40px;
+}
+
+.admin h1 {
+  margin-bottom: 20px;
+}
+
+.admin-form {
+  display: grid;
+  gap: 10px;
+  max-width: 400px;
+  margin-bottom: 30px;
+}
+
+.admin-form input,
+.admin-form textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.admin-form button {
+  padding: 12px;
+  background: #ff4f87;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.admin-card {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.admin-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.admin-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.admin-actions button {
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.admin-actions button:first-child {
+  background: #2196f3;
+  color: white;
+}
+
+.admin-actions button:last-child {
+  background: red;
+  color: white;
+}
+
 @media (max-width: 1024px) {
   .auth-card,
   .auth-card--reverse {
