@@ -21,14 +21,6 @@ const Navbar = () => {
         <Link to="/" className="navbar__brand">
           ShopEase
         </Link>
-        <Route
-  path="/admin"
-  element={
-    <AdminRoute>
-      <Admin />
-    </AdminRoute>
-  }
-/>
 <Link to="/cart">Cart ({cart.length})</Link>
         <div className="navbar__actions">
           {user && (
