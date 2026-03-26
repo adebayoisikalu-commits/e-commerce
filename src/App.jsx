@@ -84,7 +84,7 @@ const AppLayout = () => {
     </ProtectedRoute>
   }
 />
-<Route path="/admin" element={<Admin />} />
+ <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
