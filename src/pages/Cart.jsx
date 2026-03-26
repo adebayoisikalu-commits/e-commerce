@@ -10,28 +10,142 @@ export default function Cart() {
     total,
   } = useContext(CartContext);
 
-  if (!cart.length) return <h2>Your cart is empty</h2>;
+  if (!cart.length)
+    return (
+      <h2
+        style={{
+          textAlign: "center",
+          marginTop: "50px",
+          fontSize: "28px",
+          color: "#555",
+          animation: "fadeIn 0.8s ease-in-out",
+        }}
+      >
+        Your cart is empty 🛒
+      </h2>
+    );
 
   return (
-    <div className="container">
-      <h1>Your Cart</h1>
+    <div
+      style={{
+        maxWidth: "900px",
+        margin: "40px auto",
+        padding: "20px",
+        borderRadius: "20px",
+        boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+        background: "linear-gradient(135deg, #f9fafb, #eef2f7)",
+        fontFamily: "Arial, sans-serif",
+        animation: "fadeIn 0.6s ease-in-out",
+      }}
+    >
+      <h1
+        style={{
+          textAlign: "center",
+          marginBottom: "30px",
+          fontSize: "32px",
+        }}
+      >
+        🛍️ Your Cart
+      </h1>
 
       {cart.map((item) => (
-        <div key={item._id}>
-          <h3>{item.name}</h3>
-          <p>${item.price}</p>
+        <div
+          key={item._id}
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "15px",
+            marginBottom: "15px",
+            borderRadius: "15px",
+            background: "#fff",
+            boxShadow: "0 5px 15px rgba(0,0,0,0.08)",
+            transition: "transform 0.3s ease, box-shadow 0.3s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.02)";
+            e.currentTarget.style.boxShadow = "0 10px 25px rgba(0,0,0,0.15)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+            e.currentTarget.style.boxShadow = "0 5px 15px rgba(0,0,0,0.08)";
+          }}
+        >
+          <div>
+            <h3 style={{ margin: 0 }}>{item.name}</h3>
+            <p style={{ margin: "5px 0", color: "#666" }}>
+              ${item.price}
+            </p>
+          </div>
 
-          <button onClick={() => decreaseQty(item._id)}>-</button>
-          <span>{item.quantity}</span>
-          <button onClick={() => increaseQty(item._id)}>+</button>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <button
+              onClick={() => decreaseQty(item._id)}
+              style={btnStyle}
+            >
+              −
+            </button>
 
-          <button onClick={() => removeFromCart(item._id)}>
+            <span style={{ fontSize: "18px", minWidth: "20px", textAlign: "center" }}>
+              {item.quantity}
+            </span>
+
+            <button
+              onClick={() => increaseQty(item._id)}
+              style={btnStyle}
+            >
+              +
+            </button>
+          </div>
+
+          <button
+            onClick={() => removeFromCart(item._id)}
+            style={{
+              padding: "8px 14px",
+              borderRadius: "10px",
+              border: "none",
+              background: "#ff4d4f",
+              color: "#fff",
+              cursor: "pointer",
+              transition: "0.3s",
+            }}
+            onMouseEnter={(e) => (e.target.style.background = "#d9363e")}
+            onMouseLeave={(e) => (e.target.style.background = "#ff4d4f")}
+          >
             Remove
           </button>
         </div>
       ))}
 
-      <h2>Total: ${total}</h2>
+      <h2
+        style={{
+          textAlign: "right",
+          marginTop: "30px",
+          fontSize: "24px",
+        }}
+      >
+        Total: ${total}
+      </h2>
+
+      <style>
+        {`
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+        `}
+      </style>
     </div>
   );
 }
+
+const btnStyle = {
+  padding: "6px 12px",
+  borderRadius: "8px",
+  border: "none",
+  background: "#4f46e5",
+  color: "#fff",
+  cursor: "pointer",
+  fontSize: "16px",
+  transition: "0.2s",
+};
