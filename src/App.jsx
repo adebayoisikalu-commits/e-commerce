@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Cart from "./pages/Cart";
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Admin from "./pages/Admin";
 
 const getStoredUser = () => {
   const token = localStorage.getItem('authToken');
@@ -83,6 +84,7 @@ const AppLayout = () => {
     </ProtectedRoute>
   }
 />
+<Route path="/admin" element={<Admin />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>

@@ -11,72 +11,106 @@ export default function Signup() {
     password: "",
   });
 
-  const [errors, setErrors] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const validate = () => {
-    const nextErrors = {};
-
-    if (!formData.name.trim()) nextErrors.name = "Full name is required";
-
-    if (!formData.email.trim()) {
-      nextErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      nextErrors.email = "Enter a valid email";
-    }
-
-    if (!formData.password.trim()) {
-      nextErrors.password = "Password required";
-    } else if (formData.password.length < 6) {
-      nextErrors.password = "Min 6 characters";
-    }
-
-    return nextErrors;
-  };
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
     setErrorMessage("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const nextErrors = validate();
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length) return;
-
     try {
       setLoading(true);
 
-      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, formData);
-      
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/auth/register`,
+        formData
+      );
 
       navigate("/login", {
-        replace: true,
-        state: { message: "Account created. Please login." },
+        state: { message: "Account created successfully!" },
       });
     } catch (err) {
-      setErrorMessage(
-        err.response?.data?.message || "Signup failed"
-      );
+      setErrorMessage(err.response?.data?.message || "Signup failed");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="auth-shell">
-      <form onSubmit={handleSubmit}>
-        <input name="name" placeholder="Name" onChange={handleChange} />
-        <input name="email" placeholder="Email" onChange={handleChange} />
-        <input name="password" type="password" onChange={handleChange} />
-        <button>{loading ? "Loading..." : "Signup"}</button>
-        {errorMessage && <p>{errorMessage}</p>}
-        <Link to="/login">Login</Link>
-      </form>
+    <div className="auth-shell auth-shell--signup">
+      <div className="auth-card auth-card--reverse">
+        
+        {/* LEFT SIDE */}
+        <section className="auth-panel auth-panel--accent">
+          <div className="auth-panel__content auth-panel__content--center">
+            <span className="auth-badge">Join ShopEase</span>
+            <h2 className="auth-welcome-title">Welcome Back!</h2>
+            <p className="auth-welcome-copy">
+              Already have an account? Login and continue shopping.
+            </p>
+
+            <Link to="/login" className="auth-button auth-button--ghost">
+              Sign In
+            </Link>
+          </div>
+        </section>
+
+        {/* RIGHT SIDE */}
+        <section className="auth-panel auth-panel--form">
+          <div className="auth-panel__content auth-panel__content--center">
+            <span className="auth-eyebrow">Create account</span>
+            <h1 className="auth-title">Join the store</h1>
+
+            {errorMessage && (
+              <div className="auth-alert auth-alert--error">
+                {errorMessage}
+              </div>
+            )}
+
+            <form className="auth-form" onSubmit={handleSubmit}>
+              <div className="auth-field">
+                <label>Name</label>
+                <input
+                  name="name"
+                  onChange={handleChange}
+                  placeholder="Your name"
+                />
+              </div>
+
+              <div className="auth-field">
+                <label>Email</label>
+                <input
+                  name="email"
+                  onChange={handleChange}
+                  placeholder="you@example.com"
+                />
+              </div>
+
+              <div className="auth-field">
+                <label>Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                  placeholder="Create password"
+                />
+              </div>
+
+              <button className="auth-button">
+                {loading ? "Creating..." : "Sign Up"}
+              </button>
+            </form>
+
+            <p className="auth-switch-text">
+              Already have an account? <Link to="/login">Login</Link>
+            </p>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
