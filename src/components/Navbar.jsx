@@ -1,5 +1,4 @@
- // Navbar.jsx
-import React from 'react';
+
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { Link, useNavigate } from 'react-router-dom';
@@ -25,7 +24,7 @@ const Navbar = () => {
 
         <Link to="/cart">Cart ({cart.length})</Link>
 
-        {/* Admin link only visible to your email */}
+      
         {user && user.email === "adebayoisikalu@gmail.com" && (
           <Link to="/admin" className="navbar__admin">
             Admin
