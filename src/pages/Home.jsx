@@ -14,7 +14,7 @@ export default function Home() {
       .catch((err) => console.log(err));
   }, []);
 
-  const featuredProducts = products.slice(0, 8);
+  const featuredProducts = products.slice(0, 30);
 
   return (
     <main className="home-page">
