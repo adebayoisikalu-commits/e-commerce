@@ -1,37 +1,28 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
 const Product = require("../models/Product");
 
-// GET ALL PRODUCTS
+// GET all products
 router.get("/", async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ message: err.message });
   }
 });
 
-// ADD PRODUCT
+// CREATE product
 router.post("/", async (req, res) => {
   try {
     const product = await Product.create(req.body);
-    res.json(product);
+    res.status(201).json(product);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ message: err.message });
   }
 });
 
-// ✅ DELETE PRODUCT
-router.delete("/:id", async (req, res) => {
-  try {
-    await Product.findByIdAndDelete(req.params.id);
-    res.json({ message: "Product deleted" });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// ✅ UPDATE PRODUCT (THIS IS YOUR FIX 🔥)
+// UPDATE product
 router.put("/:id", async (req, res) => {
   try {
     const updated = await Product.findByIdAndUpdate(
@@ -41,7 +32,17 @@ router.put("/:id", async (req, res) => {
     );
     res.json(updated);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// DELETE product
+router.delete("/:id", async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.json({ message: "Deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 
