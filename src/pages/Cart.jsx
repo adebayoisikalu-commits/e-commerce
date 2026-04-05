@@ -59,7 +59,7 @@ export default function Cart() {
             marginBottom: "15px",
             borderRadius: "15px",
             background: "#fff",
-            boxShadow: "0 5px 15px rgba(0,0,0,0.08)",
+            boxShadow: "0 5px 15px rgba(207, 51, 124, 0.08)",
             transition: "transform 0.3s ease, box-shadow 0.3s ease",
           }}
           onMouseEnter={(e) => {
@@ -104,7 +104,7 @@ export default function Cart() {
               padding: "8px 14px",
               borderRadius: "10px",
               border: "none",
-              background: "#302c2c",
+              background: "#cf4aa7",
               color: "#fff",
               cursor: "pointer",
               transition: "0.3s",
@@ -143,7 +143,7 @@ const btnStyle = {
   padding: "6px 12px",
   borderRadius: "8px",
   border: "none",
-  background: "#120d77",
+  background: "#c41b6f",
   color: "#fff",
   cursor: "pointer",
   fontSize: "16px",

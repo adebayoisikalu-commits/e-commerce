@@ -13,7 +13,6 @@ export default function Home() {
       .then((res) => setProducts(res.data))
       .catch((err) => console.log(err));
   }, []);
-
   const featuredProducts = products.slice(0, 30);
 
   return (
