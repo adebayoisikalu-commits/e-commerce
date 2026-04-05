@@ -104,13 +104,13 @@ export default function Cart() {
               padding: "8px 14px",
               borderRadius: "10px",
               border: "none",
-              background: "#cf4aa7",
+              background: " #de4778",
               color: "#fff",
               cursor: "pointer",
               transition: "0.3s",
             }}
-            onMouseEnter={(e) => (e.target.style.background = "#1d127c")}
-            onMouseLeave={(e) => (e.target.style.background = "#2c0781")}
+            onMouseEnter={(e) => (e.target.style.background = " #db7998")}
+            onMouseLeave={(e) => (e.target.style.background = " #e96a92")}
           >
             Remove
           </button>
@@ -143,7 +143,7 @@ const btnStyle = {
   padding: "6px 12px",
   borderRadius: "8px",
   border: "none",
-  background: "#c41b6f",
+  background: " #de4778",
   color: "#fff",
   cursor: "pointer",
   fontSize: "16px",
