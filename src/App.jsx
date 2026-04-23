@@ -7,6 +7,7 @@ import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Admin from "./pages/Admin";
+import ProductDetails from "./pages/ProductDetails";
 
 // Get user from localStorage
 const getStoredUser = () => {
@@ -97,6 +98,14 @@ const AppLayout = () => {
             <AdminRoute>
               <Admin />
             </AdminRoute>
+          }
+        />
+        <Route
+          path="/product/:id"
+          element={
+            <ProtectedRoute>
+              <ProductDetails />
+            </ProtectedRoute>
           }
         />
         {/* Wildcard route */}

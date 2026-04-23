@@ -1,5 +1,6 @@
 
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function ProductCard({ product, addToCart }) {
   return (
@@ -20,10 +21,6 @@ export default function ProductCard({ product, addToCart }) {
       <div className="product-card__content">
         <p className="product-card__eyebrow">Luxury Picks</p>
         <h3 className="product-card__title">{product.name}</h3>
-        <p className="product-card__description">
-          {product.description ||
-            "Elevated essentials designed to bring a refined finish to your everyday wardrobe."}
-        </p>
 
         <div className="product-card__footer">
           <div>
@@ -31,12 +28,17 @@ export default function ProductCard({ product, addToCart }) {
             <h4 className="product-card__price">${product.price}</h4>
           </div>
 
-          <button
-            className="product-card__button"
-            onClick={() => addToCart(product)}
-          >
-            Add to Cart
-          </button>
+          <div className="product-card__actions">
+            <Link to={`/product/${product._id}`} className="product-card__button product-card__button--secondary">
+              View Details
+            </Link>
+            <button
+              className="product-card__button"
+              onClick={() => addToCart(product)}
+            >
+              Add to Cart
+            </button>
+          </div>
         </div>
       </div>
     </motion.article>
