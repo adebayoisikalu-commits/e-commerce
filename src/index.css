@@ -677,9 +677,10 @@ input {
   font-weight: 700;
   color: #ffffff;
   background: linear-gradient(135deg, var(--auth-accent-start) 0%, var(--auth-accent-end) 100%);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 15px rgba(255, 79, 135, 0.2);
 }
 
 .product-card__button::before {
@@ -689,13 +690,14 @@ input {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .product-card__button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 79, 135, 0.3);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(255, 79, 135, 0.35);
+  background: linear-gradient(135deg, #ff5a8a 0%, #ff3d7f 100%);
 }
 
 .product-card__button:hover::before {
@@ -703,17 +705,20 @@ input {
 }
 
 .product-card__button:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 15px rgba(255, 79, 135, 0.2);
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 5px 15px rgba(255, 79, 135, 0.25);
+  transition-duration: 0.15s;
 }
 
 .product-card__button--secondary {
-  background: rgba(255, 79, 135, 0.08);
+  background: rgba(255, 79, 135, 0.06);
   color: #d64073;
-  border: 2px solid rgba(255, 79, 135, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid rgba(255, 79, 135, 0.25);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(255, 79, 135, 0.1);
 }
 
 .product-card__button--secondary::before {
@@ -723,16 +728,16 @@ input {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 79, 135, 0.1), transparent);
-  transition: left 0.5s;
+  background: linear-gradient(90deg, transparent, rgba(255, 79, 135, 0.15), transparent);
+  transition: left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .product-card__button--secondary:hover {
-  background: rgba(255, 79, 135, 0.15);
+  background: rgba(255, 79, 135, 0.12);
   color: #c03366;
-  border-color: rgba(255, 79, 135, 0.4);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 79, 135, 0.2);
+  border-color: rgba(255, 79, 135, 0.5);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(255, 79, 135, 0.25);
 }
 
 .product-card__button--secondary:hover::before {
@@ -740,8 +745,9 @@ input {
 }
 
 .product-card__button--secondary:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 15px rgba(255, 79, 135, 0.15);
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 5px 15px rgba(255, 79, 135, 0.2);
+  transition-duration: 0.15s;
 }
 
 .empty-products {
@@ -833,11 +839,43 @@ input {
   min-height: 56px;
   padding: 0 24px;
   border: none;
-  border-radius: 14px;
+  border-radius: 16px;
   cursor: pointer;
   font-weight: 700;
+  font-size: 1.1rem;
   color: #ffffff;
   background: linear-gradient(135deg, var(--auth-accent-start) 0%, var(--auth-accent-end) 100%);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(255, 79, 135, 0.2);
+}
+
+.product-details__button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.product-details__button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(255, 79, 135, 0.4);
+  background: linear-gradient(135deg, #ff5a8a 0%, #ff3d7f 100%);
+}
+
+.product-details__button:hover::before {
+  left: 100%;
+}
+
+.product-details__button:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 6px 20px rgba(255, 79, 135, 0.3);
+  transition-duration: 0.1s;
 }
 
 .loading,
