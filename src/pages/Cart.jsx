@@ -12,140 +12,86 @@ export default function Cart() {
 
   if (!cart.length)
     return (
-      <h2
-        style={{
-          textAlign: "center",
-          marginTop: "50px",
-          fontSize: "28px",
-          color: "#555",
-          animation: "fadeIn 0.8s ease-in-out",
-        }}
-      >
-        Your cart is empty 🛒
-      </h2>
+      <main className="cart-page">
+        <div className="cart-empty">
+          <div className="cart-empty__icon">🛒</div>
+          <h2 className="cart-empty__title">Your cart is empty</h2>
+          <p className="cart-empty__text">Add some products to get started!</p>
+        </div>
+      </main>
     );
 
   return (
-    <div
-      style={{
-        maxWidth: "900px",
-        margin: "40px auto",
-        padding: "20px",
-        borderRadius: "20px",
-        boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-        background: "linear-gradient(135deg, #f9fafb, #eef2f7)",
-        fontFamily: "Arial, sans-serif",
-        animation: "fadeIn 0.6s ease-in-out",
-      }}
-    >
-      <h1
-        style={{
-          textAlign: "center",
-          marginBottom: "30px",
-          fontSize: "32px",
-        }}
-      >
-        🛍️ Your Cart
-      </h1>
+    <main className="cart-page">
+      <div className="cart-container">
+        <div className="cart-header">
+          <h1 className="cart-title">Your Shopping Cart</h1>
+          <div className="cart-count">{cart.length} item{cart.length !== 1 ? 's' : ''}</div>
+        </div>
 
-      {cart.map((item) => (
-        <div
-          key={item._id}
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "15px",
-            marginBottom: "15px",
-            borderRadius: "15px",
-            background: "#fff",
-            boxShadow: "0 5px 15px rgba(207, 51, 124, 0.08)",
-            transition: "transform 0.3s ease, box-shadow 0.3s ease",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "scale(1.02)";
-            e.currentTarget.style.boxShadow = "0 10px 25px rgba(0,0,0,0.15)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "scale(1)";
-            e.currentTarget.style.boxShadow = "0 5px 15px rgba(0,0,0,0.08)";
-          }}
-        >
-          <div>
-            <h3 style={{ margin: 0 }}>{item.name}</h3>
-            <p style={{ margin: "5px 0", color: "#666" }}>
-              ${item.price}
-            </p>
+        <div className="cart-items">
+          {cart.map((item, index) => (
+            <div
+              key={item._id}
+              className="cart-item"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className="cart-item__image">
+                <img src={item.image} alt={item.name} />
+              </div>
+
+              <div className="cart-item__content">
+                <h3 className="cart-item__title">{item.name}</h3>
+                <p className="cart-item__price">${item.price}</p>
+              </div>
+
+              <div className="cart-item__quantity">
+                <button
+                  className="quantity-btn quantity-btn--decrease"
+                  onClick={() => decreaseQty(item._id)}
+                  aria-label="Decrease quantity"
+                >
+                  −
+                </button>
+                <span className="quantity-value">{item.quantity}</span>
+                <button
+                  className="quantity-btn quantity-btn--increase"
+                  onClick={() => increaseQty(item._id)}
+                  aria-label="Increase quantity"
+                >
+                  +
+                </button>
+              </div>
+
+              <div className="cart-item__subtotal">
+                <span className="subtotal-label">Subtotal</span>
+                <span className="subtotal-value">${(item.price * item.quantity).toFixed(2)}</span>
+              </div>
+
+              <button
+                className="cart-item__remove"
+                onClick={() => removeFromCart(item._id)}
+                aria-label="Remove item"
+              >
+                <span className="remove-icon">×</span>
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <div className="cart-summary">
+          <div className="cart-total">
+            <div className="total-row">
+              <span className="total-label">Total</span>
+              <span className="total-value">${total.toFixed(2)}</span>
+            </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <button
-              onClick={() => decreaseQty(item._id)}
-              style={btnStyle}
-            >
-              −
-            </button>
-
-            <span style={{ fontSize: "18px", minWidth: "20px", textAlign: "center" }}>
-              {item.quantity}
-            </span>
-
-            <button
-              onClick={() => increaseQty(item._id)}
-              style={btnStyle}
-            >
-              +
-            </button>
-          </div>
-
-          <button
-            onClick={() => removeFromCart(item._id)}
-            style={{
-              padding: "8px 14px",
-              borderRadius: "10px",
-              border: "none",
-              background: " #de4778",
-              color: "#fff",
-              cursor: "pointer",
-              transition: "0.3s",
-            }}
-            onMouseEnter={(e) => (e.target.style.background = " #db7998")}
-            onMouseLeave={(e) => (e.target.style.background = " #e96a92")}
-          >
-            Remove
+          <button className="checkout-btn">
+            Proceed to Checkout
           </button>
         </div>
-      ))}
-
-      <h2
-        style={{
-          textAlign: "right",
-          marginTop: "30px",
-          fontSize: "24px",
-        }}
-      >
-        Total: ${total}
-      </h2>
-
-      <style>
-        {`
-          @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-        `}
-      </style>
-    </div>
+      </div>
+    </main>
   );
 }
-
-const btnStyle = {
-  padding: "6px 12px",
-  borderRadius: "8px",
-  border: "none",
-  background: " #de4778",
-  color: "#fff",
-  cursor: "pointer",
-  fontSize: "16px",
-  transition: "0.2s",
-};
