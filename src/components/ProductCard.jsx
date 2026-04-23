@@ -21,6 +21,13 @@ export default function ProductCard({ product, addToCart }) {
       <div className="product-card__content">
         <p className="product-card__eyebrow">Luxury Picks</p>
         <h3 className="product-card__title">{product.name}</h3>
+        <p className="product-card__description">
+          {product.description
+            ? product.description.length > 80
+              ? product.description.substring(0, 80) + "..."
+              : product.description
+            : "Elevated essentials designed to bring a refined finish to your everyday wardrobe."}
+        </p>
 
         <div className="product-card__footer">
           <div>

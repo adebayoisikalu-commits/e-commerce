@@ -631,7 +631,7 @@ input {
 
 .product-card__title {
   margin: 0;
-  font-size: 1.28rem;
+  font-size: 1.1rem;
   line-height: 1.2;
 }
 
@@ -639,7 +639,7 @@ input {
   margin: 0;
   color: #756984;
   line-height: 1.7;
-  min-height: 82px;
+  min-height: 60px;
 }
 
 .product-card__footer {
