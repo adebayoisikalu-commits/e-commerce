@@ -2,17 +2,25 @@ import { useEffect, useState, useContext } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
+import Skeleton from "../components/Skeleton";
 import { CartContext } from "../context/CartContext";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_API_URL}/api/products`)
-      .then((res) => setProducts(res.data))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        setProducts(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   }, []);
   const featuredProducts = products.slice(0, 30);
 
@@ -113,13 +121,26 @@ export default function Home() {
         </div>
 
         <div className="products-grid">
-          {featuredProducts.map((product) => (
-            <ProductCard
-              key={product._id}
-              product={product}
-              addToCart={addToCart}
-            />
-          ))}
+          {loading
+            ? Array.from({ length: 8 }).map((_, index) => (
+                <div key={index} className="product-card skeleton-card">
+                  <div className="product-card__media">
+                    <Skeleton height="300px" />
+                  </div>
+                  <div className="product-card__content">
+                    <Skeleton width="80%" height="20px" className="skeleton-text" />
+                    <Skeleton width="60%" height="16px" className="skeleton-text" />
+                    <Skeleton width="40%" height="24px" className="skeleton-text" />
+                  </div>
+                </div>
+              ))
+            : featuredProducts.map((product) => (
+                <ProductCard
+                  key={product._id}
+                  product={product}
+                  addToCart={addToCart}
+                />
+              ))}
         </div>
 
         {!featuredProducts.length && (

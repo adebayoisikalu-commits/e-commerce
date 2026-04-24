@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Skeleton from "../components/Skeleton";
 import { CartContext } from "../context/CartContext";
 
 export default function ProductDetails() {
@@ -32,7 +33,18 @@ export default function ProductDetails() {
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <div className="loading">Loading product details...</div>
+        <div className="product-details">
+          <div className="product-details__media">
+            <Skeleton height="400px" />
+          </div>
+          <div className="product-details__content">
+            <Skeleton width="60%" height="32px" className="skeleton-text" />
+            <Skeleton width="80%" height="24px" className="skeleton-text" />
+            <Skeleton width="100%" height="20px" className="skeleton-text" />
+            <Skeleton width="100%" height="20px" className="skeleton-text" />
+            <Skeleton width="40%" height="28px" className="skeleton-text" />
+          </div>
+        </div>
       </motion.main>
     );
   }
