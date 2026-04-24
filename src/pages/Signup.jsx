@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -41,7 +42,13 @@ export default function Signup() {
   };
 
   return (
-    <div className="auth-shell auth-shell--signup">
+    <motion.div
+      className="auth-shell auth-shell--signup"
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -24 }}
+      transition={{ duration: 0.55, ease: "easeOut" }}
+    >
       <div className="auth-card auth-card--reverse">
         
         {/* LEFT SIDE */}

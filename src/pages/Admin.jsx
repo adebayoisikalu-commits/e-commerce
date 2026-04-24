@@ -1,5 +1,6 @@
  // Admin.jsx
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import axios from "axios";
 
 export default function Admin() {
@@ -86,7 +87,13 @@ export default function Admin() {
   };
 
   return (
-    <div className="admin">
+    <motion.div
+      className="admin"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <h1>Admin Panel</h1>
 
       {/* FORM */}

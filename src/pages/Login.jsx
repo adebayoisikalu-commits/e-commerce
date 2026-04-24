@@ -1,4 +1,5 @@
  import { useState } from "react";
+import { motion } from "framer-motion";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -75,7 +76,13 @@ export default function Login() {
   };
 
   return (
-    <div className="auth-shell auth-shell--login">
+    <motion.div
+      className="auth-shell auth-shell--login"
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -24 }}
+      transition={{ duration: 0.55, ease: "easeOut" }}
+    >
       <div className="auth-card">
         <section className="auth-panel auth-panel--form">
           <div className="auth-panel__content auth-panel__content--center">

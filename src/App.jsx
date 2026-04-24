@@ -1,5 +1,6 @@
 // App.jsx
 import React from "react";
+import { AnimatePresence } from "framer-motion";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -59,58 +60,60 @@ const AppLayout = () => {
   return (
     <>
       {!hideNavbar && <Navbar />}
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PublicOnlyRoute>
-              <Login />
-            </PublicOnlyRoute>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <PublicOnlyRoute>
-              <Signup />
-            </PublicOnlyRoute>
-          }
-        />
-        <Route
-          path="/cart"
-          element={
-            <ProtectedRoute>
-              <Cart />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <AdminRoute>
-              <Admin />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/product/:id"
-          element={
-            <ProtectedRoute>
-              <ProductDetails />
-            </ProtectedRoute>
-          }
-        />
-        {/* Wildcard route */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <AnimatePresence mode="wait" initial={false}>
+        <Routes location={location} key={location.pathname}>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <PublicOnlyRoute>
+                <Login />
+              </PublicOnlyRoute>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <PublicOnlyRoute>
+                <Signup />
+              </PublicOnlyRoute>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <Admin />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/product/:id"
+            element={
+              <ProtectedRoute>
+                <ProductDetails />
+              </ProtectedRoute>
+            }
+          />
+          {/* Wildcard route */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AnimatePresence>
     </>
   );
 };

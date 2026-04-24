@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { motion } from "framer-motion";
 import { CartContext } from "../context/CartContext";
 
 export default function Cart() {
@@ -12,7 +13,13 @@ export default function Cart() {
 
   if (!cart.length)
     return (
-      <main className="cart-page">
+      <motion.main
+        className="cart-page"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
         <div className="cart-empty">
           <div className="cart-empty__icon">🛒</div>
           <h2 className="cart-empty__title">Your cart is empty</h2>
@@ -22,7 +29,13 @@ export default function Cart() {
     );
 
   return (
-    <main className="cart-page">
+    <motion.main
+      className="cart-page"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <div className="cart-container">
         <div className="cart-header">
           <h1 className="cart-title">Your Shopping Cart</h1>

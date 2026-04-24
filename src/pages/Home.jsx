@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import { motion } from "framer-motion";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
 import { CartContext } from "../context/CartContext";
@@ -16,7 +17,13 @@ export default function Home() {
   const featuredProducts = products.slice(0, 30);
 
   return (
-    <main className="home-page">
+    <motion.main
+      className="home-page"
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -24 }}
+      transition={{ duration: 0.55, ease: "easeOut" }}
+    >
       <section className="hero-section">
         <div className="hero-section__content">
           <span className="hero-section__badge">Premium Fashion Store</span>

@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { CartContext } from "../context/CartContext";
@@ -24,9 +25,15 @@ export default function ProductDetails() {
 
   if (loading) {
     return (
-      <main className="product-details-page">
+      <motion.main
+        className="product-details-page"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
         <div className="loading">Loading product details...</div>
-      </main>
+      </motion.main>
     );
   }
 
@@ -39,7 +46,13 @@ export default function ProductDetails() {
   }
 
   return (
-    <main className="product-details-page">
+    <motion.main
+      className="product-details-page"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <div className="product-details">
         <div className="product-details__media">
           <img
