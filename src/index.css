@@ -1600,6 +1600,8 @@ input {
   top: 0;
   z-index: 20;
   padding: 18px 20px 0;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
 }
 
 .navbar__inner {
@@ -1611,9 +1613,9 @@ input {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.72);
-  box-shadow: 0 16px 40px rgba(31, 23, 43, 0.08);
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  box-shadow: 0 16px 40px rgba(31, 23, 43, 0.04);
   backdrop-filter: blur(16px);
 }
 
