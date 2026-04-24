@@ -664,7 +664,7 @@ input {
   box-shadow: 0 18px 44px rgba(31, 23, 43, 0.08);
 }
 
-..product-card__media {
+.product-card__media {
   position: relative;
   aspect-ratio: 4 / 4.5;
   background: #fff3f3;
