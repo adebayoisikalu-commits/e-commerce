@@ -25,7 +25,7 @@ export default function Cart() {
           <h2 className="cart-empty__title">Your cart is empty</h2>
           <p className="cart-empty__text">Add some products to get started!</p>
         </div>
-      </main>
+      </motion.main>
     );
 
   return (
@@ -105,6 +105,6 @@ export default function Cart() {
           </button>
         </div>
       </div>
-    </main>
+    </motion.main>
   );
 }

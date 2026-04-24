@@ -147,6 +147,6 @@ export default function Admin() {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -19,7 +19,7 @@ const getStoredUser = () => {
 
   try {
     return JSON.parse(user);
-  } catch (error) {
+  } catch (_error) {
     localStorage.removeItem("authToken");
     localStorage.removeItem("authUser");
     return null;

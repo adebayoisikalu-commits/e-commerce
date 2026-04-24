@@ -159,6 +159,6 @@ export default function Login() {
           </div>
         </section>
       </div>
-    </div>
+    </motion.div>
   );
 }

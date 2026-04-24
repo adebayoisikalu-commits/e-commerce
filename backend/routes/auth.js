@@ -37,7 +37,7 @@ router.post('/register', async (req, res) => {
       message: 'Account created successfully.',
       user: buildSafeUser(user),
     });
-  } catch (error) {
+  } catch (_error) {
     return res.status(500).json({ message: 'Unable to register right now. Please try again.' });
   }
 });
