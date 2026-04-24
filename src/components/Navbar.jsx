@@ -7,7 +7,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const storedUser = localStorage.getItem('authUser');
   const user = storedUser ? JSON.parse(storedUser) : null;
-  const { cart, favourites } = useContext(CartContext);
+  const { cart } = useContext(CartContext);
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
@@ -22,7 +22,6 @@ const Navbar = () => {
         Vogue
         </Link>
 
-        <Link to="/favourites">Favourites ({favourites.length})</Link>
         <Link to="/cart">Cart ({cart.length})</Link>
 
       

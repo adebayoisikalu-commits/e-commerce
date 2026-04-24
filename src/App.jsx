@@ -5,7 +5,6 @@ import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-route
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
-import Favourites from "./pages/Favourites";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Admin from "./pages/Admin";
@@ -92,14 +91,6 @@ const AppLayout = () => {
             element={
               <ProtectedRoute>
                 <Cart />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/favourites"
-            element={
-              <ProtectedRoute>
-                <Favourites />
               </ProtectedRoute>
             }
           />

@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-export default function ProductCard({ product, addToCart, toggleFavourite, isFavourite }) {
+export default function ProductCard({ product, addToCart }) {
   return (
     <motion.article
       className="product-card"
@@ -15,16 +15,6 @@ export default function ProductCard({ product, addToCart, toggleFavourite, isFav
           alt={product.name}
           className="product-card__image"
         />
-        {toggleFavourite && (
-          <button
-            type="button"
-            className={`product-card__favourite ${isFavourite ? "product-card__favourite--active" : ""}`}
-            onClick={() => toggleFavourite(product)}
-            aria-label={isFavourite ? "Remove from favourites" : "Add to favourites"}
-          >
-            ♥
-          </button>
-        )}
       </div>
 
       <div className="product-card__content">

@@ -8,18 +8,9 @@ export function CartProvider({ children }) {
     return saved ? JSON.parse(saved) : [];
   });
 
-  const [favourites, setFavourites] = useState(() => {
-    const saved = localStorage.getItem("favourites");
-    return saved ? JSON.parse(saved) : [];
-  });
-
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
-
-  useEffect(() => {
-    localStorage.setItem("favourites", JSON.stringify(favourites));
-  }, [favourites]);
 
   const addToCart = (product) => {
     setCart((prev) => {
@@ -36,28 +27,6 @@ export function CartProvider({ children }) {
       return [...prev, { ...product, quantity: 1 }];
     });
   };
-
-  const addToFavourites = (product) => {
-    setFavourites((prev) => {
-      if (prev.some((p) => p._id === product._id)) return prev;
-      return [...prev, product];
-    });
-  };
-
-  const removeFromFavourites = (id) => {
-    setFavourites((prev) => prev.filter((p) => p._id !== id));
-  };
-
-  const toggleFavourite = (product) => {
-    setFavourites((prev) => {
-      if (prev.some((p) => p._id === product._id)) {
-        return prev.filter((p) => p._id !== product._id);
-      }
-      return [...prev, product];
-    });
-  };
-
-  const isFavourite = (id) => favourites.some((item) => item._id === id);
 
   const removeFromCart = (id) => {
     setCart((prev) => prev.filter((p) => p._id !== id));
@@ -92,15 +61,11 @@ export function CartProvider({ children }) {
     <CartContext.Provider
       value={{
         cart,
-        favourites,
         addToCart,
         removeFromCart,
         increaseQty,
         decreaseQty,
         total,
-        toggleFavourite,
-        removeFromFavourites,
-        isFavourite,
       }}
     >
       {children}
