@@ -6,7 +6,7 @@ import { CartContext } from "../context/CartContext";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, toggleFavourite, isFavourite } = useContext(CartContext);
 
   useEffect(() => {
     axios
@@ -118,6 +118,8 @@ export default function Home() {
               key={product._id}
               product={product}
               addToCart={addToCart}
+              toggleFavourite={toggleFavourite}
+              isFavourite={isFavourite(product._id)}
             />
           ))}
         </div>

@@ -8,7 +8,7 @@ export default function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, toggleFavourite, isFavourite } = useContext(CartContext);
 
   useEffect(() => {
     axios
@@ -73,12 +73,21 @@ export default function ProductDetails() {
               <h2 className="product-details__price">${product.price}</h2>
             </div>
 
+            <div className="product-details__actions">
+            <button
+              className="product-details__button product-details__button--ghost"
+              type="button"
+              onClick={() => toggleFavourite(product)}
+            >
+              {isFavourite(product._id) ? "Remove from favourites" : "Add to favourites"}
+            </button>
             <button
               className="product-details__button"
               onClick={() => addToCart(product)}
             >
               Add to Cart
             </button>
+          </div>
           </div>
         </div>
       </div>
