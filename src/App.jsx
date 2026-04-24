@@ -1,5 +1,5 @@
 // App.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -33,6 +33,15 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
+const ScrollToTop = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location.pathname]);
+
+  return null;
+};
  
 const AdminRoute = ({ children }) => {
   const user = getStoredUser();
@@ -60,6 +69,7 @@ const AppLayout = () => {
   return (
     <>
       {!hideNavbar && <Navbar />}
+      <ScrollToTop />
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route
