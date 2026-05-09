@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Admin from "./pages/Admin";
 import ProductDetails from "./pages/ProductDetails";
+import { Analytics } from "@vercel/analytics/react";
 
 // Get user from localStorage
 const getStoredUser = () => {
@@ -70,6 +71,10 @@ const AppLayout = () => {
     <>
       {!hideNavbar && <Navbar />}
       <ScrollToTop />
+
+      {/* ✅ VERCEL ANALYTICS ADDED HERE */}
+      <Analytics />
+
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route
