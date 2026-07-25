@@ -20,6 +20,7 @@ mongoose.connect(process.env.MONGO_URI)
 // Routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/products", require("./routes/product"));
+app.use("/api/orders", require("./routes/orders"));
 
 // Start server
 app.listen(PORT, () => {
