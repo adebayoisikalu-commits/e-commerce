@@ -69,13 +69,16 @@ export default function Checkout() {
       image: item.image,
     }));
 
+    const pickupAddress = "7 Sarigiwa Street, Sabo Ikorodu, Lagos State";
+    const orderAddress = deliveryOption === "Pick Up" ? pickupAddress : form.address;
+
     const payload = {
       customerName: form.customerName,
       customerEmail: form.customerEmail,
       phone: form.phone,
       state: form.state,
       city: form.city,
-      address: form.address,
+      address: orderAddress,
       deliveryOption,
       paymentMethod,
       shippingFee,
@@ -231,6 +234,13 @@ export default function Checkout() {
                   Bank Transfer
                 </label>
               </div>
+
+              {deliveryOption === "Pick Up" && (
+                <div className="pickup-info">
+                  <p className="pickup-title">Pick-up address</p>
+                  <p>7 Sarigiwa Street, Sabo Ikorodu, Lagos State</p>
+                </div>
+              )}
             </div>
           </div>
 
@@ -285,7 +295,7 @@ export default function Checkout() {
             <h2>Payment Method</h2>
             <span className="payment-badge">Bank Transfer</span>
           </div>
-          <p className="payment-description">Use the details below for checkout. This is a fake example account.</p>
+          <p className="payment-description">Use the details below for checkout.</p>
           <ul className="payment-details">
             <li>
               <strong>Opay:</strong>
