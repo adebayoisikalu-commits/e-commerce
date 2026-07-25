@@ -23,6 +23,7 @@ export default function Checkout() {
     address: "",
   });
   const [deliveryOption, setDeliveryOption] = useState("Home Delivery");
+  const [paymentMethod, setPaymentMethod] = useState("Bank Transfer");
   const [shippingFee, setShippingFee] = useState(0);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -76,6 +77,7 @@ export default function Checkout() {
       city: form.city,
       address: form.address,
       deliveryOption,
+      paymentMethod,
       shippingFee,
       items,
       subTotal: total,
@@ -215,6 +217,20 @@ export default function Checkout() {
                   Pick Up
                 </label>
               </div>
+
+              <div className="payment-options">
+                <p>Payment Method</p>
+                <label>
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="Bank Transfer"
+                    checked={paymentMethod === "Bank Transfer"}
+                    onChange={() => setPaymentMethod("Bank Transfer")}
+                  />
+                  Bank Transfer
+                </label>
+              </div>
             </div>
           </div>
 
@@ -265,9 +281,26 @@ export default function Checkout() {
         </form>
 
         <div className="payment-info">
-          <h2>Payment Method</h2>
-          <p>Bank Transfer only</p>
-          <p>Use your Order ID as payment reference.</p>
+          <div className="payment-info-header">
+            <h2>Payment Method</h2>
+            <span className="payment-badge">Bank Transfer</span>
+          </div>
+          <p className="payment-description">Use the details below for checkout. This is a fake example account.</p>
+          <ul className="payment-details">
+            <li>
+              <strong>Opay:</strong>
+              <span>Sunmisola Isikalu</span>
+            </li>
+            <li>
+              <strong>Account number:</strong>
+              <span>7049187380</span>
+            </li>
+            <li>
+              <strong>Phone:</strong>
+              <span>07049187380</span>
+            </li>
+          </ul>
+          <p className="payment-hint">Use your Order ID as payment reference.</p>
         </div>
       </motion.div>
     </motion.main>
