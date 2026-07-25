@@ -23,6 +23,7 @@ const Navbar = () => {
         </Link>
 
         <Link to="/cart">Cart ({cart.length})</Link>
+        <Link to="/orders">Orders</Link>
 
       
         {user && user.email === "adebayoisikalu@gmail.com" && (

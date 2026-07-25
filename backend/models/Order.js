@@ -30,7 +30,8 @@ const orderSchema = new mongoose.Schema(
     paymentMethod: { type: String, default: "Bank Transfer" },
     paymentStatus: { type: String, default: "Pending Payment" },
     paymentNotice: { type: Boolean, default: false },
-    deliveryStatus: { type: String, default: "Pending" },
+    deliveryStatus: { type: String, default: "Pending Payment" },
+    estimatedDelivery: { type: Date },
   },
   { timestamps: true }
 );

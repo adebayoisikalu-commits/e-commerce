@@ -44,6 +44,10 @@ router.post("/", auth, async (req, res) => {
 
     const orderId = await buildOrderId();
 
+    const estimatedDelivery = new Date(
+      Date.now() + (deliveryOption === "Home Delivery" ? 5 : 2) * 24 * 60 * 60 * 1000
+    );
+
     const order = await Order.create({
       orderId,
       userId: req.user.id,
@@ -58,6 +62,7 @@ router.post("/", auth, async (req, res) => {
       items,
       subTotal,
       total,
+      estimatedDelivery,
     });
 
     return res.status(201).json(order);
@@ -70,7 +75,22 @@ router.post("/", auth, async (req, res) => {
 // Get orders (admin gets all, regular users get own orders)
 router.get("/", auth, async (req, res) => {
   try {
+    const { search, status, orderId } = req.query;
     const query = req.user.email === ADMIN_EMAIL ? {} : { userId: req.user.id };
+
+    if (status && status !== "All") {
+      query.deliveryStatus = status;
+    }
+
+    const searchTerm = orderId || search;
+    if (searchTerm) {
+      query.$or = [
+        { orderId: { $regex: searchTerm, $options: "i" } },
+        { customerName: { $regex: searchTerm, $options: "i" } },
+        { phone: { $regex: searchTerm, $options: "i" } },
+      ];
+    }
+
     const orders = await Order.find(query).sort({ createdAt: -1 });
     return res.json(orders);
   } catch (error) {

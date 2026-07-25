@@ -120,6 +120,14 @@ const AppLayout = () => {
             }
           />
           <Route
+            path="/orders"
+            element={
+              <ProtectedRoute>
+                <Orders />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/order-confirmation"
             element={
               <ProtectedRoute>
