@@ -190,15 +190,6 @@ export default function Home() {
           </div>
         )}
 
-        {!featuredProducts.length && (
-          <div className="empty-products">
-            <h3>No products yet</h3>
-            <p>
-              Add products from the backend and they will appear beautifully
-              here.
-            </p>
-          </div>
-        )}
       </section>
     </motion.main>
   );
