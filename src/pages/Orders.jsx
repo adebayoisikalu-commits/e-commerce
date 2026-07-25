@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import "./admin.css";
 import axios from "axios";
 
 export default function Orders() {

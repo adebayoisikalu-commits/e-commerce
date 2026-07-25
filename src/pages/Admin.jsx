@@ -1,5 +1,6 @@
 ﻿// Admin.jsx
 import { useCallback, useEffect, useState } from "react";
+import "./admin.css";
 import { motion } from "framer-motion";
 import axios from "axios";
 
