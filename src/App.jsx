@@ -80,14 +80,7 @@ const AppLayout = () => {
 
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/" element={<Home />} />
           <Route
             path="/login"
             element={
@@ -104,14 +97,7 @@ const AppLayout = () => {
               </PublicOnlyRoute>
             }
           />
-          <Route
-            path="/cart"
-            element={
-              <ProtectedRoute>
-                <Cart />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/cart" element={<Cart />} />
           <Route
             path="/checkout"
             element={
@@ -144,14 +130,7 @@ const AppLayout = () => {
               </AdminRoute>
             }
           />
-          <Route
-            path="/product/:id"
-            element={
-              <ProtectedRoute>
-                <ProductDetails />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/product/:id" element={<ProductDetails />} />
           {/* Wildcard route */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
