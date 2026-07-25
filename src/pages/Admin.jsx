@@ -18,7 +18,7 @@ const STATUS_OPTIONS = [
 export default function Admin() {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
-  const [activeTab, setActiveTab] = useState("orders");
+  const [activeTab, setActiveTab] = useState("products");
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [form, setForm] = useState({
@@ -79,6 +79,7 @@ export default function Admin() {
   };
 
   const [imagePreview, setImagePreview] = useState("");
+  const [saving, setSaving] = useState(false);
 
   const handleImageChange = (e) => {
     const val = e.target.value;
@@ -88,6 +89,7 @@ export default function Admin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSaving(true);
     try {
       const payload = {
         ...form,
@@ -115,7 +117,10 @@ export default function Admin() {
       alert("Product saved successfully");
     } catch (err) {
       console.error("Failed to save product", err);
-      alert("Failed to save product");
+      const msg = err?.response?.data?.message || err.message || "Failed to save product";
+      alert(msg);
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -241,8 +246,8 @@ export default function Admin() {
               onChange={handleFormChange}
               required
             />
-            <button type="submit">
-              {editingId ? "Update Product" : "Add Product"}
+            <button type="submit" disabled={saving}>
+              {saving ? "Saving..." : editingId ? "Update Product" : "Add Product"}
             </button>
           </form>
 
