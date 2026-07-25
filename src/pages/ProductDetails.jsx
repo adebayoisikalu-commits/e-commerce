@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Skeleton from "../components/Skeleton";
 import { CartContext } from "../context/CartContext";
+import { formatCurrency } from "../utils/currency";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -82,7 +83,7 @@ export default function ProductDetails() {
           <div className="product-details__footer">
             <div>
               <span className="product-details__price-label">Price</span>
-              <h2 className="product-details__price">${product.price}</h2>
+              <h2 className="product-details__price">{formatCurrency(product.price)}</h2>
             </div>
 
             <div className="product-details__actions">

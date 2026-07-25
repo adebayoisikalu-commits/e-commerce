@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CartContext } from "../context/CartContext";
+import { formatCurrency } from "../utils/currency";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ export default function Cart() {
 
               <div className="cart-item__content">
                 <h3 className="cart-item__title">{item.name}</h3>
-                <p className="cart-item__price">${item.price}</p>
+                <p className="cart-item__price">{formatCurrency(item.price)}</p>
               </div>
 
               <div className="cart-item__quantity">
@@ -80,7 +81,7 @@ export default function Cart() {
 
               <div className="cart-item__subtotal">
                 <span className="subtotal-label">Subtotal</span>
-                <span className="subtotal-value">${(item.price * item.quantity).toFixed(2)}</span>
+                <span className="subtotal-value">{formatCurrency(item.price * item.quantity)}</span>
               </div>
 
               <button
@@ -98,7 +99,7 @@ export default function Cart() {
           <div className="cart-total">
             <div className="total-row">
               <span className="total-label">Total</span>
-              <span className="total-value">${total.toFixed(2)}</span>
+              <span className="total-value">{formatCurrency(total)}</span>
             </div>
           </div>
 

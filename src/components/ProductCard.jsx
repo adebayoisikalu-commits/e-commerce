@@ -1,6 +1,7 @@
 
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { formatCurrency } from "../utils/currency";
 
 export default function ProductCard({ product, addToCart }) {
   return (
@@ -31,7 +32,7 @@ export default function ProductCard({ product, addToCart }) {
         <div className="product-card__footer">
           <div>
             <span className="product-card__price-label">Price</span>
-            <h4 className="product-card__price">${product.price}</h4>
+            <h4 className="product-card__price">{formatCurrency(product.price)}</h4>
           </div>
 
           <div className="product-card__actions">

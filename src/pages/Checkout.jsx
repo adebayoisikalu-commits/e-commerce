@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { CartContext } from "../context/CartContext";
+import { formatCurrency } from "../utils/currency";
 
 const shippingRates = {
   Lagos: 2000,
@@ -113,91 +114,108 @@ export default function Checkout() {
   return (
     <motion.main
       className="checkout-page"
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.45, ease: "easeOut" }}
+      exit={{ opacity: 0, y: -24 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className="checkout-card">
-        <h1>Checkout</h1>
+      <motion.div
+        className="checkout-card"
+        initial={{ scale: 0.98, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.45, delay: 0.1, ease: "easeOut" }}
+      >
+        <div className="checkout-hero">
+          <div>
+            <p className="checkout-eyebrow">Secure checkout</p>
+            <h1>Complete your order</h1>
+          </div>
+          <div className="checkout-pill">Fast delivery • Bank transfer</div>
+        </div>
 
         <form className="checkout-form" onSubmit={handleSubmit}>
-          <label>
-            Full Name
-            <input
-              name="customerName"
-              value={form.customerName}
-              onChange={handleChange}
-              placeholder="John Doe"
-              required
-            />
-          </label>
+          <div className="checkout-grid">
+            <div className="checkout-field-group">
+              <label>
+                Full Name
+                <input
+                  name="customerName"
+                  value={form.customerName}
+                  onChange={handleChange}
+                  placeholder="John Doe"
+                  required
+                />
+              </label>
 
-          <label>
-            Phone Number
-            <input
-              name="phone"
-              value={form.phone}
-              onChange={handleChange}
-              placeholder="08012345678"
-              required
-            />
-          </label>
+              <label>
+                Phone Number
+                <input
+                  name="phone"
+                  value={form.phone}
+                  onChange={handleChange}
+                  placeholder="08012345678"
+                  required
+                />
+              </label>
 
-          <label>
-            Email (optional)
-            <input
-              name="customerEmail"
-              value={form.customerEmail}
-              onChange={handleChange}
-              placeholder="you@example.com"
-            />
-          </label>
+              <label>
+                Email (optional)
+                <input
+                  name="customerEmail"
+                  value={form.customerEmail}
+                  onChange={handleChange}
+                  placeholder="you@example.com"
+                />
+              </label>
+            </div>
 
-          <label>
-            State
-            <input
-              name="state"
-              value={form.state}
-              onChange={handleChange}
-              placeholder="Lagos"
-              required
-            />
-          </label>
+            <div className="checkout-field-group">
+              <label>
+                State
+                <input
+                  name="state"
+                  value={form.state}
+                  onChange={handleChange}
+                  placeholder="Lagos"
+                  required
+                />
+              </label>
 
-          <label>
-            City
-            <input
-              name="city"
-              value={form.city}
-              onChange={handleChange}
-              placeholder="Ikeja"
-              required
-            />
-          </label>
+              <label>
+                City
+                <input
+                  name="city"
+                  value={form.city}
+                  onChange={handleChange}
+                  placeholder="Ikeja"
+                  required
+                />
+              </label>
 
-          <div className="delivery-options">
-            <p>Delivery Options</p>
-            <label>
-              <input
-                type="radio"
-                name="deliveryOption"
-                value="Home Delivery"
-                checked={deliveryOption === "Home Delivery"}
-                onChange={() => setDeliveryOption("Home Delivery")}
-              />
-              Home Delivery
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="deliveryOption"
-                value="Pick Up"
-                checked={deliveryOption === "Pick Up"}
-                onChange={() => setDeliveryOption("Pick Up")}
-              />
-              Pick Up
-            </label>
+              <div className="delivery-options">
+                <p>Delivery Options</p>
+                <label>
+                  <input
+                    type="radio"
+                    name="deliveryOption"
+                    value="Home Delivery"
+                    checked={deliveryOption === "Home Delivery"}
+                    onChange={() => setDeliveryOption("Home Delivery")}
+                  />
+                  Home Delivery
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="deliveryOption"
+                    value="Pick Up"
+                    checked={deliveryOption === "Pick Up"}
+                    onChange={() => setDeliveryOption("Pick Up")}
+                  />
+                  Pick Up
+                </label>
+              </div>
+            </div>
           </div>
 
           {deliveryOption === "Home Delivery" && (
@@ -213,26 +231,37 @@ export default function Checkout() {
             </label>
           )}
 
-          <div className="checkout-summary">
+          <motion.div
+            className="checkout-summary"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.15 }}
+          >
             <div>
               <strong>Cart total</strong>
-              <span>₦{total.toFixed(2)}</span>
+              <span>{formatCurrency(total)}</span>
             </div>
             <div>
               <strong>Shipping fee</strong>
-              <span>₦{shippingFee.toFixed(2)}</span>
+              <span>{formatCurrency(shippingFee)}</span>
             </div>
             <div className="checkout-total">
               <strong>Total</strong>
-              <span>₦{orderTotal.toFixed(2)}</span>
+              <span>{formatCurrency(orderTotal)}</span>
             </div>
-          </div>
+          </motion.div>
 
           {error && <div className="form-error">{error}</div>}
 
-          <button className="checkout-button" type="submit" disabled={loading}>
+          <motion.button
+            className="checkout-button"
+            type="submit"
+            disabled={loading}
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+          >
             {loading ? "Placing order..." : "Place order"}
-          </button>
+          </motion.button>
         </form>
 
         <div className="payment-info">
@@ -240,7 +269,7 @@ export default function Checkout() {
           <p>Bank Transfer only</p>
           <p>Use your Order ID as payment reference.</p>
         </div>
-      </div>
+      </motion.div>
     </motion.main>
   );
 }
