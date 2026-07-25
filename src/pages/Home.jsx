@@ -7,6 +7,7 @@ import { CartContext } from "../context/CartContext";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useContext(CartContext);
 
@@ -22,7 +23,17 @@ export default function Home() {
         setLoading(false);
       });
   }, []);
+
   const featuredProducts = products.slice(0, 30);
+  const itemsPerPage = 8;
+  const totalPages = Math.max(1, Math.ceil(featuredProducts.length / itemsPerPage));
+  const currentProducts = featuredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages]);
 
   return (
     <motion.main
@@ -134,7 +145,7 @@ export default function Home() {
                   </div>
                 </div>
               ))
-            : featuredProducts.map((product) => (
+            : currentProducts.map((product) => (
                 <ProductCard
                   key={product._id}
                   product={product}
@@ -142,6 +153,42 @@ export default function Home() {
                 />
               ))}
         </div>
+
+        {totalPages > 1 && !loading && (
+          <div className="pagination">
+            <button
+              type="button"
+              className="pagination__button"
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
+            >
+              Prev
+            </button>
+            <div className="pagination__pages">
+              {Array.from({ length: totalPages }).map((_, index) => {
+                const page = index + 1;
+                return (
+                  <button
+                    key={page}
+                    type="button"
+                    className={`pagination__page ${currentPage === page ? 'is-active' : ''}`}
+                    onClick={() => setCurrentPage(page)}
+                  >
+                    {page}
+                  </button>
+                );
+              })}
+            </div>
+            <button
+              type="button"
+              className="pagination__button"
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
+            >
+              Next
+            </button>
+          </div>
+        )}
 
         {!featuredProducts.length && (
           <div className="empty-products">
