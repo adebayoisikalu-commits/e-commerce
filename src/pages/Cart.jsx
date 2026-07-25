@@ -1,8 +1,10 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CartContext } from "../context/CartContext";
 
 export default function Cart() {
+  const navigate = useNavigate();
   const {
     cart,
     removeFromCart,
@@ -100,7 +102,7 @@ export default function Cart() {
             </div>
           </div>
 
-          <button className="checkout-btn">
+          <button className="checkout-btn" onClick={() => navigate("/checkout") }>
             Proceed to Checkout
           </button>
         </div>

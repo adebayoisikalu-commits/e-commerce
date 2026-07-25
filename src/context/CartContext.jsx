@@ -52,6 +52,10 @@ export function CartProvider({ children }) {
     );
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   const total = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -65,6 +69,7 @@ export function CartProvider({ children }) {
         removeFromCart,
         increaseQty,
         decreaseQty,
+        clearCart,
         total,
       }}
     >

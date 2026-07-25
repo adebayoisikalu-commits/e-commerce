@@ -5,6 +5,8 @@ import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-route
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import OrderConfirmation from "./pages/OrderConfirmation";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Admin from "./pages/Admin";
@@ -106,6 +108,22 @@ const AppLayout = () => {
             element={
               <ProtectedRoute>
                 <Cart />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/order-confirmation"
+            element={
+              <ProtectedRoute>
+                <OrderConfirmation />
               </ProtectedRoute>
             }
           />
