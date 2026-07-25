@@ -169,6 +169,16 @@ export default function Admin() {
           >
             Products
           </button>
+          <button
+            className="button button--primary admin-add-product"
+            onClick={() => {
+              setActiveTab("products");
+              setForm({ name: "", price: "", description: "", image: "" });
+              setEditingId(null);
+            }}
+          >
+            Add Product
+          </button>
         </div>
       </header>
 
