@@ -39,6 +39,7 @@
 .button{padding:10px 14px;border-radius:14px;border:none;cursor:pointer;transition:all .18s ease;font-weight:500}
 .button--primary{background:linear-gradient(90deg,var(--accent-start),var(--accent-end));color:#fff;box-shadow:0 10px 24px rgba(255, 79, 135, 0.16);}
 .button--secondary{background:rgba(255,79,135,0.12);border:1px solid rgba(255,79,135,0.24);color:var(--text);}
+.button--danger{background:#fff0f2;color:#c53063;border:1px solid rgba(197,48,99,0.16);box-shadow:0 10px 24px rgba(197,48,99,0.08);}
 .admin-order-controls button,
 .order-card__actions .button--secondary{
   background: linear-gradient(90deg,var(--accent-start),var(--accent-end));

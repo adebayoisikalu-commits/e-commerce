@@ -259,8 +259,12 @@ export default function Admin() {
                 <h3>{product.name}</h3>
                 <p>${product.price}</p>
                 <div className="admin-actions">
-                  <button onClick={() => handleEditProduct(product)}>Edit</button>
-                  <button onClick={() => handleDeleteProduct(product._id)}>Delete</button>
+                  <button className="button button--secondary" onClick={() => handleEditProduct(product)}>
+                    Edit
+                  </button>
+                  <button className="button button--danger" onClick={() => handleDeleteProduct(product._id)}>
+                    Delete
+                  </button>
                 </div>
               </div>
             ))}
@@ -284,7 +288,7 @@ export default function Admin() {
                 </option>
               ))}
             </select>
-            <button type="button" onClick={fetchOrders}>
+            <button type="button" className="button button--secondary" onClick={fetchOrders}>
               Refresh
             </button>
           </div>
@@ -342,7 +346,7 @@ export default function Admin() {
 
                   <div className="order-card__actions">
                     <button
-                      className="button button--secondary"
+                      className="button button--primary"
                       onClick={() => confirmPayment(order._id)}
                     >
                       Confirm Payment
