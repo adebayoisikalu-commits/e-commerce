@@ -78,21 +78,41 @@ export default function Admin() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const [imagePreview, setImagePreview] = useState("");
+
+  const handleImageChange = (e) => {
+    const val = e.target.value;
+    setForm((f) => ({ ...f, image: val }));
+    setImagePreview(val);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const payload = {
+        ...form,
+        price: Number(form.price) || 0,
+      };
+
+      let res;
       if (editingId) {
-        await axios.put(`${productAPI}/${editingId}`, form, {
+        res = await axios.put(`${productAPI}/${editingId}`, payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setEditingId(null);
+        // update local products list
+        setProducts((prev) => prev.map((p) => (p._id === res.data._id ? res.data : p)));
       } else {
-        await axios.post(productAPI, form, {
+        res = await axios.post(productAPI, payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
+        // prepend created product
+        setProducts((prev) => [res.data, ...prev]);
       }
+
       setForm({ name: "", price: "", description: "", image: "" });
-      fetchProducts();
+      setImagePreview("");
+      alert("Product saved successfully");
     } catch (err) {
       console.error("Failed to save product", err);
       alert("Failed to save product");
@@ -195,18 +215,25 @@ export default function Admin() {
             />
             <input
               name="price"
+              type="number"
+              step="0.01"
               placeholder="Price"
               value={form.price}
-              onChange={handleFormChange}
+              onChange={(e) => setForm({ ...form, price: e.target.value })}
               required
             />
             <input
               name="image"
-              placeholder="Image URL"
+              placeholder="Image URL (https://...)"
               value={form.image}
-              onChange={handleFormChange}
+              onChange={handleImageChange}
               required
             />
+            {imagePreview && (
+              <div className="image-preview">
+                <img src={imagePreview} alt="preview" style={{ maxWidth: 160, maxHeight: 120 }} />
+              </div>
+            )}
             <textarea
               name="description"
               placeholder="Description"
