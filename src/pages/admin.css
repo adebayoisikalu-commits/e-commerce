@@ -1,21 +1,25 @@
 /* admin.css - styles for Admin + Orders pages */
 :root{
-  --bg:#0f1724; /* dark navy */
-  --card:#0b1220;
-  --muted:#94a3b8;
-  --accent:#06b6d4; /* cyan */
-  --accent-2:#7c3aed; /* purple */
+  /* reuse global auth palette when available */
+  --accent-start: var(--auth-accent-start, #ff7d73);
+  --accent-end: var(--auth-accent-end, #ff4f87);
+  --text: var(--auth-text, #1f172b);
+  --muted: var(--auth-muted, #7f728f);
+  --card: var(--auth-surface, rgba(255,255,255,0.92));
+  --glass: rgba(255,255,255,0.06);
   --success:#10b981;
   --danger:#ef4444;
-  --glass: rgba(255,255,255,0.03);
 }
 
 /* Base page layout */
 .admin, .orders-page{
   padding: 28px;
-  color: #e6eef8;
+  color: var(--text);
   min-height: 100vh;
-  background: linear-gradient(180deg, #071226 0%, #02101a 100%);
+  background:
+    radial-gradient(circle at top left, rgba(255, 125, 115, 0.06), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(255, 79, 135, 0.05), transparent 32%),
+    linear-gradient(135deg, #fff8f8 0%, #ffeef3 100%);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
 }
 
@@ -31,26 +35,26 @@
 
 .admin-tabs{display:flex;align-items:center;gap:8px}
 .admin-tabs button{background:transparent;border:0;color:var(--muted);padding:10px 12px;border-radius:8px;cursor:pointer;transition:all .18s ease}
-.admin-tabs button.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021028;box-shadow:0 6px 18px rgba(12,24,50,.45);transform:translateY(-2px)}
+.admin-tabs button.active{background:linear-gradient(90deg,var(--accent-start),var(--accent-end));color:#fff;box-shadow:0 12px 30px rgba(225,82,118,0.12);transform:translateY(-2px)}
 .button{padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
-.button--primary{background:linear-gradient(90deg,var(--accent),#00c2ff);color:#022}
+.button--primary{background:linear-gradient(90deg,var(--accent-start),var(--accent-end));color:#fff}
 .button--secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
 
 /* Admin products layout */
 .admin-products{display:flex;gap:24px;align-items:flex-start}
-.admin-form{width:360px;background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.6);backdrop-filter:blur(6px)}
+.admin-form{width:360px;background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--auth-shadow, 0 24px 60px rgba(224,78,120,0.12));backdrop-filter:blur(6px)}
 .admin-form h2{margin:0 0 12px}
 .admin-form input, .admin-form textarea, .admin-order-controls input, .admin-order-controls select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;margin-bottom:10px}
 .admin-form textarea{min-height:96px;resize:vertical}
 .admin-form .image-preview{display:flex;justify-content:center;margin-bottom:10px}
-.admin-form button[type="submit"]{width:100%;margin-top:6px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021;padding:10px;border-radius:10px;font-weight:600}
+.admin-form button[type="submit"]{width:100%;margin-top:6px;background:linear-gradient(90deg,var(--accent-start),var(--accent-end));color:#fff;padding:10px;border-radius:10px;font-weight:600}
 
 .admin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;flex:1}
-.admin-card{background:var(--glass);padding:12px;border-radius:12px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;transition:transform .2s ease,box-shadow .2s ease}
+.admin-card{background:var(--card);padding:12px;border-radius:12px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;border:1px solid var(--auth-border);transition:transform .2s ease,box-shadow .2s ease}
 .admin-card img{width:100%;height:140px;object-fit:cover;border-radius:8px}
 .admin-card h3{margin:0;font-size:1rem}
 .admin-card p{margin:0;color:var(--muted)}
-.admin-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
+.admin-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(224,78,120,0.12)}
 .admin-actions{display:flex;gap:8px;width:100%;justify-content:space-between}
 .admin-actions button{flex:1;padding:8px;border-radius:8px}
 
@@ -59,14 +63,14 @@
 .admin-order-controls{display:flex;gap:8px;align-items:center;margin-bottom:16px}
 .admin-order-controls input{flex:1}
 .admin-order-list{display:flex;flex-direction:column;gap:12px}
-.order-card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.5);display:flex;flex-direction:column;gap:12px;animation:fadeUp .28s cubic-bezier(.2,.9,.3,1)}
+.order-card{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--auth-shadow, 0 8px 24px rgba(2,6,23,0.08));display:flex;flex-direction:column;gap:12px;animation:fadeUp .28s cubic-bezier(.2,.9,.3,1)}
 .order-card__top{display:flex;justify-content:space-between;align-items:center}
 .order-card__info{display:flex;gap:20px;justify-content:space-between}
 .order-card__products{background:rgba(255,255,255,0.02);padding:8px;border-radius:8px}
 .order-item-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,0.02)}
 .order-item-row:last-child{border-bottom:0}
 .badge{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:8px;font-size:0.8rem}
-.badge--status{background:linear-gradient(90deg,#ffd54a,#ff7a59);color:#061018}
+.badge--status{background:linear-gradient(90deg, rgba(255,125,115,0.14), rgba(255,79,135,0.18));color:var(--text)}
 .order-card__actions{display:flex;gap:8px;align-items:center}
 
 /* Small screens */
