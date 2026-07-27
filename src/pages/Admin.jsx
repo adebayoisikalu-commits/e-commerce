@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import "./admin.css";
 import { motion } from "framer-motion";
 import axios from "axios";
+import { formatCurrency } from "../utils/currency";
 
 const STATUS_OPTIONS = [
   "All",
@@ -169,6 +170,12 @@ export default function Admin() {
     updateOrderStatus(orderId, { deliveryStatus: status });
   };
 
+  const summary = {
+    totalOrders: orders.length,
+    totalRevenue: orders.reduce((sum, order) => sum + Number(order.total || 0), 0),
+    pendingPayments: orders.filter((order) => order.paymentStatus !== "Payment Confirmed").length,
+  };
+
   return (
     <motion.div
       className="admin"
@@ -177,24 +184,26 @@ export default function Admin() {
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <header className="admin-header">
-        <div>
-          <h1>Admin Dashboard</h1>
-          <p>Manage products, review orders, and confirm payments.</p>
-        </div>
-        <div className="admin-tabs">
-          <button
-            className={activeTab === "orders" ? "active" : ""}
-            onClick={() => setActiveTab("orders")}
-          >
-            Orders
-          </button>
-          <button
-            className={activeTab === "products" ? "active" : ""}
-            onClick={() => setActiveTab("products")}
-          >
-            Products
-          </button>
+      <div className="admin-layout">
+        <aside className="admin-sidebar">
+          <div className="admin-sidebar__brand">
+            <h1>Admin Dashboard</h1>
+            <p>Manage products, review orders, and confirm payments.</p>
+          </div>
+          <nav className="admin-tabs">
+            <button
+              className={activeTab === "orders" ? "active" : ""}
+              onClick={() => setActiveTab("orders")}
+            >
+              Orders
+            </button>
+            <button
+              className={activeTab === "products" ? "active" : ""}
+              onClick={() => setActiveTab("products")}
+            >
+              Products
+            </button>
+          </nav>
           <button
             className="button button--primary admin-add-product"
             onClick={() => {
@@ -205,10 +214,29 @@ export default function Admin() {
           >
             Add Product
           </button>
-        </div>
-      </header>
+        </aside>
 
-      {activeTab === "products" ? (
+        <div className="admin-content">
+          <div className="admin-content__top">
+            <p className="admin-content__intro">Welcome back, admin. View and manage store activity from one streamlined dashboard.</p>
+          </div>
+
+          <div className="admin-summary-cards">
+            <div className="admin-summary-card">
+              <p className="summary-card__label">Total Orders</p>
+              <h2>{summary.totalOrders}</h2>
+            </div>
+            <div className="admin-summary-card">
+              <p className="summary-card__label">Total Revenue</p>
+              <h2>{formatCurrency(summary.totalRevenue)}</h2>
+            </div>
+            <div className="admin-summary-card">
+              <p className="summary-card__label">Pending Payments</p>
+              <h2>{summary.pendingPayments}</h2>
+            </div>
+          </div>
+
+          {activeTab === "products" ? (
         <section className="admin-products">
           <form onSubmit={handleSubmit} className="admin-form">
             <h2>{editingId ? "Edit Product" : "Add Product"}</h2>
@@ -257,7 +285,7 @@ export default function Admin() {
               <div key={product._id} className="admin-card">
                 <img src={product.image} alt={product.name} />
                 <h3>{product.name}</h3>
-                <p>${product.price}</p>
+                <p className="admin-card__price">{formatCurrency(product.price)}</p>
                 <div className="admin-actions">
                   <button className="button button--secondary" onClick={() => handleEditProduct(product)}>
                     Edit
@@ -324,7 +352,7 @@ export default function Admin() {
                     </div>
                     <div>
                       <p className="label">Total</p>
-                      <p>₦{order.total.toFixed(2)}</p>
+                      <p>{formatCurrency(order.total)}</p>
                       <p>Payment: {order.paymentStatus}</p>
                     </div>
                   </div>
@@ -339,7 +367,7 @@ export default function Admin() {
                     {order.items.map((item) => (
                       <div key={item.productId} className="order-item-row">
                         <span>{item.name} x{item.quantity}</span>
-                        <span>₦{(item.price * item.quantity).toFixed(2)}</span>
+                        <span>{formatCurrency(item.price * item.quantity)}</span>
                       </div>
                     ))}
                   </div>
@@ -368,6 +396,8 @@ export default function Admin() {
           )}
         </section>
       )}
+        </div>
+      </div>
     </motion.div>
   );
 }
